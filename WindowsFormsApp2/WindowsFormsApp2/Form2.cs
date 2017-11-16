@@ -37,6 +37,7 @@ namespace WindowsFormsApp2
                 
                 timer1.Enabled = false;
                 pictureBox1.Visible = false;
+                p = 0;
                 MessageBox.Show("The End");
             }
             
