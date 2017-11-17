@@ -14,7 +14,10 @@ namespace WindowsFormsApp2
     {
         int p = 0;
         int k = 0;
+        Size a = new Size(160, 154);
+        Size b = new Size(80, 77);
         Random r = new Random();
+        bool op = false;
     
         public Form2()
         {
@@ -23,22 +26,46 @@ namespace WindowsFormsApp2
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            k = k + 1;
-            label1.Text = k.ToString();
+
+            if (op == true)
+            {
+                k = k + 1;
+                label1.Text = k.ToString();
+            }
+            op = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+          
             Point p1 = new Point(r.Next(100, this.Width - pictureBox1.Width), r.Next(100, this.Height - pictureBox1.Width));
             pictureBox1.Location = p1;
             p = p + 1;
-            if (p == 60)
+            op = true;
+            if(comboBox1.Text == "Hard"){
+                if (p == 120)
+                {
+
+                    timer1.Enabled = false;
+                    pictureBox1.Visible = false;
+                    p = 0;
+                    k = 0;
+                    label1.Text = k.ToString();
+                    MessageBox.Show("The End");
+                }
+            }
+            else
             {
-                
-                timer1.Enabled = false;
-                pictureBox1.Visible = false;
-                p = 0;
-                MessageBox.Show("The End");
+                if (p == 60)
+                {
+
+                    timer1.Enabled = false;
+                    pictureBox1.Visible = false;
+                    p = 0;
+                    k = 0;
+                    label1.Text = k.ToString();
+                    MessageBox.Show("The End");
+                }
             }
             
         }
@@ -46,8 +73,25 @@ namespace WindowsFormsApp2
         private void button1_Click(object sender, EventArgs e)
         {
             p = 0;
+            
+            if (comboBox1.Text == "Hard")
+            {
+                timer1.Interval = 500;
+                pictureBox1.Size = b;
+
+            }
+            else
+            {
+                timer1.Interval = 1000;
+                pictureBox1.Size = a;
+            }
             pictureBox1.Visible = true;
             timer1.Enabled = true;
+            
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
             
         }
     }
